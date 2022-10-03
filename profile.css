@@ -1,0 +1,234 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: poppins;
+
+}
+
+@font-face {
+    font-family: poppins;
+    src: url(fonts/Poppins-Regular.ttf)
+}
+
+body {
+    background-color: #E4EBF5;
+}
+
+.hidden {
+    display: hidden !important;
+}
+
+#user {
+    display: none;
+    box-shadow: 0.3rem 0.3rem 0.6rem,
+        -0.2rem -0.2rem 0.5rem white;
+    width: 50%;
+    position: absolute;
+    left: 25%;
+    height: 70vh;
+    padding-left: 100px;
+    background-color: #E4EBF5;
+}
+
+.image {
+    width: 20%;
+}
+
+.prof_img {
+    border-radius: 50%;
+    width: 50px;
+    margin-left: 50%;
+    margin-top: 20%;
+}
+
+.header {
+    height: 10vh;
+    display: flex;
+    box-shadow: 0.3rem 0.3rem 0.6rem,
+        -0.2rem -0.2rem 0.5rem white;
+    justify-content: space-between;
+}
+
+#signout_btn {
+    margin-right: 2%;
+}
+
+#display {
+    height: 80vh;
+    background-color: rgba(255, 255, 255, 0.212);
+    width: 80%;
+    margin-top: 2%;
+    margin-left: 10%;
+    display: flex;
+    box-shadow: 0.3rem 0.3rem 0.6rem,
+        -0.2rem -0.2rem 0.5rem white;
+}
+
+#all_users {
+    height: 100%;
+    width: 30%;
+    border-right: 1px solid black;
+    word-wrap: break-word;
+    white-space: normal;
+    overflow: scroll;
+}
+
+#users>li {
+    list-style: none;
+}
+
+#messages {
+    width: 70%;
+}
+
+#chat_with,
+#myself {
+    height: 10%;
+
+}
+
+#chat_btn {
+    cursor: pointer;
+    height: 60px;
+    margin-bottom: 5px;
+    border-bottom: 1px solid black;
+    font-weight: bold;
+    display: flex;
+}
+
+#user_name {
+   margin: 15px; 
+}
+
+#all_messages {
+    height: 80%;
+    overflow: scroll;
+    padding-left: 2%;
+    padding-right: 2%;
+    background-color: #e4ebf55d;
+}
+
+#all_messages::-webkit-scrollbar, #all_users::-webkit-scrollbar  {
+    display: none;
+}
+
+#message_list {
+    list-style: none;
+}
+
+#text_message {
+    width: 50%;
+    word-wrap: break-word;
+    white-space: normal;
+    overflow: visible;
+    font-size: 20px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    line-height: 30px;
+}
+
+#my_message {
+    background-color: lightgreen;
+    /* width: 100%; */
+    text-align: right;
+    padding: 5px;
+    width: auto;
+}
+
+#sender_message {
+    background-color: #fff;
+    padding: 5px;
+    width: auto;
+}
+
+.my_message {
+    margin-left: 50%;
+}
+
+#chat_with,
+#myself {
+    box-shadow: 0.1rem 0.1rem 0.1rem,
+        -0.1rem -0.1rem 0.3rem white;
+    font-size: 30px;
+    display: flex;
+    cursor: pointer;
+}       
+
+#myself  {
+    font-size: 150%;
+}
+
+.userImg {
+    width: 40px;
+    height: 40px;
+    margin-right: 20px;
+    margin-left: 20px;
+    margin-top: 1%;
+}
+
+#send_div {
+    box-shadow: rgb(0 0 0 / 50%) 0px -8px 6px -6px;
+}
+
+.gs-neumorphic-button, #close_btn {
+    width: max-content;
+    padding: var(--form-input-padding-gs-neumorphic-login-signup) calc(var(--form-input-padding-gs-neumorphic-login-signup) * 2.5);
+    margin-top: var(--form-input-margin-gs-neumorphic-login-signup);
+    margin-bottom: var(--form-input-margin-gs-neumorphic-login-signup);
+    border: none;
+    border-radius: var(--form-input-border-radius-gs-neumorphic-login-signup);
+    box-shadow: 0.3rem 0.3rem 0.6rem var(--lightGrey-gs-neumorphic-login-signup),
+        -0.2rem -0.2rem 0.5rem white;
+    cursor: pointer;
+    transition: var(--card-open-close-tansition-time-gs-neumorphic-login-signup) ease;
+    color: var(--form-input-font-color--gs-neumorphic-login-signup);
+    background-color: var(--lightGrey2-gs-neumorphic-login-signup);
+    font-size: var(--form-input-font-size-gs-neumorphic-login-signup);
+}
+
+.gs-neumorphic-button:hover, #close_btn:hover {
+    color: var(--header-colors-gs-neumorphic-login-signup);
+}
+
+.gs-neumorphic-button:active, #close_btn:active {
+    box-shadow: inset 0.2rem 0.2rem 0.5rem var(--lightGrey-gs-neumorphic-login-signup),
+        inset -0.2rem -0.2rem 0.5rem white;
+}
+
+.gs-neumorphic-button:focus, #close_btn:focus {
+    outline: none;
+    color: var(--header-colors-gs-neumorphic-login-signup);
+}
+
+.heading {
+    font-size: 50px;
+    color: #393B3D;
+    text-shadow: -2px -2px 5px #000000;
+}
+
+#close_btn {
+    position: absolute;
+    left: 90%;
+}
+
+#send_btn {
+    width: 40px;
+    height: 35px;
+    background-color:#393B3D;
+    border: none !important;
+    /* border-radius: 50%; */
+}
+
+#send_btn:active {
+    opacity: 50%;
+}
+
+#message {
+    width: 80%;
+    height: 30px;
+    margin-top: 1%;
+}
+
+#send_div {
+    padding-left: 10%;
+}

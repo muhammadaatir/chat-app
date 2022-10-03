@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-site-verification" content="hDmOqnCxD1a4on0-qA26mEqDo1wj9G7bPeKykTwiiCo" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="header">
+        <p class="heading">My Chat App</p>
+    </div>
+
+    
+    
+    <div class="gs-neumorphic-main-card-outer-container">
+        <div class="gs-neumorphic-main-card-container">
+            <div class="gs-neumorphic-main-card">
+                <div class="gs-neumorphic-signup gs-form-open">
+                    <div class="gs-neumorphic-signup-login-header gs-open" data-button="gs-neumorphic-signup">Signup
+                    </div>
+                    <div class="gs-neumorphic-form-container">
+                        <form>
+                            <input id="fullName" type="text" class="gs-neumorphic-input" placeholder="Full Name">
+                            <input id="phoneNo" type="text" class="gs-neumorphic-input" placeholder="Mobile Number">
+                            <input id="email" type="text" class="gs-neumorphic-input" placeholder="Email">
+                            <input id="password" type="password" class="gs-neumorphic-input" placeholder="Password">
+                            <input id="conPass" type="password" class="gs-neumorphic-input"
+                                placeholder="Confirm Password">
+                            <button id="SignUpBtn" class="gs-neumorphic-button">Signup</button>
+                        </form>
+                    </div>
+                </div>
+                
+                <div class="gs-neumorphic-login">
+                    <div class="gs-neumorphic-signup-login-header" data-button="gs-neumorphic-login">Login</div>
+                    <div class="gs-neumorphic-form-container">
+                        <form>
+                            <input id="email_login" type="email" class="gs-neumorphic-input" placeholder="Email">
+                            <input id="pass_login" type="password" class="gs-neumorphic-input" placeholder="Password">
+                            <button id="loginBtn" class="gs-neumorphic-button">Login</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <lottie-player id="loader" class="hidden loader" src="https://assets6.lottiefiles.com/temp/lf20_S0Elvk.json" background="transparent" speed="1"
+        style="width: 300px; height: 300px;" loop  autoplay></lottie-player>
+    
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script type="module" src="app.js"></script>
+</body>
+
+</html>
