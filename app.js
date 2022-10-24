@@ -28,6 +28,19 @@ var email = document.getElementById("email")
 var password = document.getElementById("password")
 var conPass = document.getElementById("conPass")
 
+
+// window.onload = async () => {
+//   const auth = getAuth();
+//   onAuthStateChanged(auth, (user) => {
+//     if (user) {
+//       swal("User Signed In", "You have already signed in","success")
+//       window.location.href = "profile.html"
+//     }
+//   });
+
+// }
+
+
 function signUp() {
   event.preventDefault();
   document.getElementById("loader").classList.remove("hidden")
@@ -68,16 +81,75 @@ signupBtn.addEventListener("click", signUp);
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-app.js";
 import { getAuth, createUserWithEmailAndPassword, sendEmailVerification, onAuthStateChanged, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-auth.js";
 import { doc, setDoc, getFirestore, getDoc } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-firestore.js";
+import {
+  getStorage,
+  ref,
+  uploadBytesResumable,
+  getDownloadURL,
+} from "https://www.gstatic.com/firebasejs/9.10.0/firebase-storage.js";
+
+var img = {
+  url: "",
+}
 
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBwbVeXvM9JrN3iGGN7__5qsNpFdscMggI",
-  authDomain: "login-signup-7f2d1.firebaseapp.com",
-  projectId: "login-signup-7f2d1",
-  storageBucket: "login-signup-7f2d1.appspot.com",
-  messagingSenderId: "155318254759",
-  appId: "1:155318254759:web:ca654eaeca23d2a0156f82"
+  apiKey: "AIzaSyDUBvn5UgU8V5XxaHn3o4jdV9KujyS0y50",
+  authDomain: "aatir-chat-app.firebaseapp.com",
+  projectId: "aatir-chat-app",
+  storageBucket: "aatir-chat-app.appspot.com",
+  messagingSenderId: "339313631186",
+  appId: "1:339313631186:web:084d65bc1e5373c669b20b"
 };
+
+// let uploadBtn = document.getElementById("upload_btn");
+
+// uploadBtn.addEventListener("click", async () => {
+//   event.preventDefault();
+//   let myFile = document.getElementById("my_file");
+//   let file = myFile.files[0];
+//   const auth = getAuth();
+//   let uid = auth.currentUser.uid;
+//   let url = await uploadFiles(file);
+//   console.log(url)
+//   img.url = url;
+
+// });
+
+// const uploadFiles = (file) => {
+//   event.preventDefault();
+//   return new Promise((resolve, reject) => {
+//     const storage = getStorage();
+//     const auth = getAuth();
+//     let uid = auth.currentUser.uid;
+//     const storageRef = ref(storage, `users/${uid}.png`);
+//     const uploadTask = uploadBytesResumable(storageRef, file);
+//     uploadTask.on(
+//       "state_changed",
+//       (snapshot) => {
+//         const progress =
+//           (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+//         console.log("Upload is " + progress + "% done");
+//         switch (snapshot.state) {
+//           case "paused":
+//             console.log("Upload is paused");
+//             break;
+//           case "running":
+//             console.log("Upload is running");
+//             break;
+//         }
+//       },
+//       (error) => {
+//         reject(error);
+//       },
+//       () => {
+//         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+//           resolve(downloadURL);
+//         });
+//       }
+//     );
+//   });
+// };
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore();
@@ -91,38 +163,44 @@ function registerUser() {
       console.log("user ==> ", user)
       console.log(email.value, "registered")
       sendEmailVerification(auth.currentUser)
-      .then((a) => {
+        .then((a) => {
           console.log("Email verification sent!", a)
           // ...
         })
         .catch((b) => {
           console.log("error sending verification email", b)
         });
-        onAuthStateChanged(auth, (user) => {
-          if (user) {
-            const uid = user.uid;
-            console.log(uid);
-          } else {
-          }
-        });
-        await setDoc(doc(db, "users", user.uid), {
-          name: fName.value,
+      onAuthStateChanged(auth, (user) => {
+        if (user) {
+          const uid = user.uid;
+          console.log(uid);
+        } else {
+        }
+      });
+      await setDoc(doc(db, "users", user.uid), {
+        name: fName.value,
         email: email.value,
         phoneNo: phone.value,
+        profile: img.url,
       });
       fName.value = "";
       phone.value = "";
       email.value = "";
       password.value = "";
       conPass.value = "";
+      my_file.value = "";
       document.getElementById("loader").classList.add("hidden")
+      swal("User Registered", "User Have Succesfully Signed Up", "success")
+      console.log(img.url);
+      // window.location.href = "profile.html"
     })
     .catch((error) => {
       const errorCode = error.code;
       const errorMessage = error.message;
-
+      
       console.log("error ==> " + errorMessage)
       alert(errorMessage)
+      document.getElementById("loader").classList.add("hidden")
     });
 
 }
@@ -149,8 +227,8 @@ btn.addEventListener("click", function login() {
           const errorMessage = error.message;
           console.log(errorCode)
           console.log(errorMessage)
-          swal(errorCode, "" ,"error")
           document.getElementById("loader").classList.add("hidden")
+          swal(errorCode, "", "error")
         });
 
 
@@ -161,3 +239,4 @@ btn.addEventListener("click", function login() {
     swal("Incorrect Email!", "Enter Email in Correct Format.", "error");
   }
 })
+

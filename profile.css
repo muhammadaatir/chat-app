@@ -44,8 +44,7 @@ body {
 .header {
     height: 10vh;
     display: flex;
-    box-shadow: 0.3rem 0.3rem 0.6rem,
-        -0.2rem -0.2rem 0.5rem white;
+    box-shadow: 0 2px 6px 0 rgb(0 0 0 / 12%), inset 0 -1px 0 0 #dadce0;
     justify-content: space-between;
 }
 
@@ -97,7 +96,7 @@ body {
 }
 
 #user_name {
-   margin: 15px; 
+    margin: 15px;
 }
 
 #all_messages {
@@ -108,7 +107,8 @@ body {
     background-color: #e4ebf55d;
 }
 
-#all_messages::-webkit-scrollbar, #all_users::-webkit-scrollbar  {
+#all_messages::-webkit-scrollbar,
+#all_users::-webkit-scrollbar {
     display: none;
 }
 
@@ -152,9 +152,9 @@ body {
     font-size: 30px;
     display: flex;
     cursor: pointer;
-}       
+}
 
-#myself  {
+#myself {
     font-size: 150%;
 }
 
@@ -164,13 +164,15 @@ body {
     margin-right: 20px;
     margin-left: 20px;
     margin-top: 1%;
+    border-radius: 50%;
 }
 
 #send_div {
     box-shadow: rgb(0 0 0 / 50%) 0px -8px 6px -6px;
 }
 
-.gs-neumorphic-button, #close_btn {
+.gs-neumorphic-button,
+#close_btn {
     width: max-content;
     padding: var(--form-input-padding-gs-neumorphic-login-signup) calc(var(--form-input-padding-gs-neumorphic-login-signup) * 2.5);
     margin-top: var(--form-input-margin-gs-neumorphic-login-signup);
@@ -186,16 +188,19 @@ body {
     font-size: var(--form-input-font-size-gs-neumorphic-login-signup);
 }
 
-.gs-neumorphic-button:hover, #close_btn:hover {
+.gs-neumorphic-button:hover,
+#close_btn:hover {
     color: var(--header-colors-gs-neumorphic-login-signup);
 }
 
-.gs-neumorphic-button:active, #close_btn:active {
+.gs-neumorphic-button:active,
+#close_btn:active {
     box-shadow: inset 0.2rem 0.2rem 0.5rem var(--lightGrey-gs-neumorphic-login-signup),
         inset -0.2rem -0.2rem 0.5rem white;
 }
 
-.gs-neumorphic-button:focus, #close_btn:focus {
+.gs-neumorphic-button:focus,
+#close_btn:focus {
     outline: none;
     color: var(--header-colors-gs-neumorphic-login-signup);
 }
@@ -214,7 +219,7 @@ body {
 #send_btn {
     width: 40px;
     height: 35px;
-    background-color:#393B3D;
+    background-color: #393B3D;
     border: none !important;
     /* border-radius: 50%; */
 }

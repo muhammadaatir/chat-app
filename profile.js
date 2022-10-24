@@ -14,12 +14,12 @@ import {
 } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-firestore.js";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyBwbVeXvM9JrN3iGGN7__5qsNpFdscMggI",
-    authDomain: "login-signup-7f2d1.firebaseapp.com",
-    projectId: "login-signup-7f2d1",
-    storageBucket: "login-signup-7f2d1.appspot.com",
-    messagingSenderId: "155318254759",
-    appId: "1:155318254759:web:ca654eaeca23d2a0156f82"
+    apiKey: "AIzaSyDUBvn5UgU8V5XxaHn3o4jdV9KujyS0y50",
+    authDomain: "aatir-chat-app.firebaseapp.com",
+    projectId: "aatir-chat-app",
+    storageBucket: "aatir-chat-app.appspot.com",
+    messagingSenderId: "339313631186",
+    appId: "1:339313631186:web:084d65bc1e5373c669b20b"
 };
 
 const app = initializeApp(firebaseConfig);
@@ -35,7 +35,10 @@ window.onload = async () => {
             const uid = user.uid;
             getDocumentFromDatabase(user.uid)
         } else {
-            swal("Please Sign In","", "error")
+            setInterval(() => {
+                swal("Please Sign In", "", "error")
+            }, 2000);
+            window.location.href = "index.html"
         }
     });
 
@@ -51,7 +54,7 @@ const getDocumentFromDatabase = async (uid) => {
         document.getElementById("main_div").innerHTML += `
         <div id="user">
         <div class="user_img" >
-        <img src="images/user.png" class="image">
+        <img src="${docSnap.data().profile}" class="image">
         <button id="close_btn" onclick="closeProf()" > <i class="fa-solid fa-xmark"></i> </button>
         </div>
         <h1> Name: ${docSnap.data().name} </h1>
@@ -105,7 +108,7 @@ const getAllUsers = async (email, myId, myName) => {
 
     querySnapshot.forEach((doc) => {
         users.innerHTML += `
-        <li onclick='startChat("${doc.id}","${doc.data().name}","${myId}","${myName}")' id="chat_btn">
+        <li onclick='startChat("${doc.id}","${doc.data().name}","${myId}","${myName}",)' id="chat_btn">
         <img src="images/user.png" class="userImg" /> <div id="user_name" >${doc.data().name}</div></li>
         `
         console.log(doc.id, " => ", doc.data());
@@ -118,9 +121,27 @@ const getAllUsers = async (email, myId, myName) => {
 }
 
 let unsubscribe;
+let chatId = "";
+// let currentUserName = "";
+// let currentUserId = "";
+// let userName = "";
+// let userId = ""
 
+let user = {
+    chatId: "",
+    currentUserName: "",
+    currentUserId: "",
+    userName: "",
+    userId: "",
+}
 
-let startChat = (id, name, currentId, currentName,) => {
+let startChat = (id, name, currentId, currentName, ) => {
+    let messageList = document.getElementById("message_list")
+    messageList.innerHTML = "";
+    user.currentUserName = currentName
+    user.currentUserId = currentId
+    user.userName = name;
+    user.userId = id
     if (unsubscribe) {
         unsubscribe();
     }
@@ -129,34 +150,41 @@ let startChat = (id, name, currentId, currentName,) => {
     <img src="images/user.png" class="userImg" />
     <h4> ${name} </h4>
     `
-    let sendBtn = document.getElementById("send_btn")
-    let message = document.getElementById("message")
-    let chatId;
+
     if (id < currentId) {
         chatId = `${id}${currentId}`;
     } else {
         chatId = `${currentId}${id}`;
     }
-    sendBtn.addEventListener("click", async () => {
-        let messageList = document.getElementById("message_list")
-        messageList.innerHTML = "";
-        if (message.value.trim() !== "") {
-            await addDoc(collection(db, "messages"), {
-                sender_name: currentName,
-                receiver_name: name,
-                sender_id: currentId,
-                receiver_id: id,
-                chat_id: chatId,
-                message: message.value,
-                timestamp: new Date(),
-            });
-            message.value = "";
-            loadAllChats(chatId, currentId);
-        } else {
-            swal("Incorrect message!", "Write a valid message", "error");
-        }
-    });
+    loadAllChats(chatId, currentId);
 }
+let sendBtn = document.getElementById("send_btn")
+let message = document.getElementById("message");
+
+
+message.addEventListener("keypress", function () {
+    if (event.key === "Enter") {
+        event.preventDefault();
+        sendBtn.click();
+    }
+});
+
+sendBtn.addEventListener("click", async () => {
+    if (message.value.trim() !== "") {
+        await addDoc(collection(db, "messages"), {
+            sender_name: user.currentUserName,
+            receiver_name: user.userName,
+            sender_id: user.currentUserId,
+            receiver_id: user.userId,
+            chat_id: chatId,
+            message: message.value,
+            timestamp: new Date(),
+        });
+        message.value = "";
+    } else {
+        swal("Incorrect message!", "Write a valid message", "error");
+    }
+});
 
 window.startChat = startChat;
 
@@ -165,7 +193,7 @@ const loadAllChats = (chatId, myId) => {
         const q = query(
             collection(db, "messages"),
             where("chat_id", "==", chatId),
-            // orderBy("timestamp", "asc")
+            orderBy("timestamp", "asc")
         );
         let messageList = document.getElementById("message_list");
         unsubscribe = onSnapshot(q, (querySnapshot) => {
@@ -179,6 +207,7 @@ const loadAllChats = (chatId, myId) => {
                 messageList.innerHTML += `<li id="text_message" class="${className}" ><div id="${className}" > ${doc.data().message} </div></li>`;
             });
         });
+        messageList.scrollTop = messageList.scrollHeight;
     }
     catch (err) {
         console.log(err)
